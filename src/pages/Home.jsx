@@ -279,12 +279,6 @@ padding: "14px",
           </h2>
 
 <div
-  style={{
-    color: "rgba(255,255,255,0.78)",
-    lineHeight: 1.85,
-    fontSize: "12px",
-    lineHeight: 1.85,
-  }}
 >
 
             As of <strong>May 8, 2026</strong>, AudioStation has officially
