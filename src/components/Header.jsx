@@ -238,7 +238,7 @@ player.playList([{
       <div className="as-inner">
 <Link to="/" className="as-logo-wrap">
   <img
-    src="https://media.maasongs.online/svgviewer-png-output.png"
+    src="https://i.ibb.co/zzp5yCH/svgviewer-png-output.png"
     alt="AudioStation"
     className="as-logo-image"
   />
