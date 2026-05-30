@@ -15,24 +15,32 @@ export default function AlbumPage() {
 
   const FALLBACK_COVER = "https://via.placeholder.com/400?text=No+Cover";
 
-const downloadFile = (url) => {
-  if (!url) return;
+const downloadFile = async (url, fileName = "song") => {
+  try {
+    if (!url) return;
 
-  const link =
-    document.createElement("a");
+    const response = await fetch(url);
 
-  link.href = url;
+    if (!response.ok) {
+      throw new Error("Download failed");
+    }
 
-  link.setAttribute(
-    "rel",
-    "noopener noreferrer"
-  );
+    const blob = await response.blob();
 
-  document.body.appendChild(link);
+    const blobUrl = window.URL.createObjectURL(blob);
 
-  link.click();
+    const a = document.createElement("a");
+    a.href = blobUrl;
+    a.download = `${fileName}_By_Lokesh_Ragutla.mp3`;
 
-  document.body.removeChild(link);
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+
+    window.URL.revokeObjectURL(blobUrl);
+  } catch (err) {
+    console.error("Download error:", err);
+  }
 };
 useEffect(() => {
   window.history.scrollRestoration = "manual";
@@ -119,10 +127,14 @@ const mapped = (songsData || []).map((s) => ({
   const handleDownloadAll = async () => {
     setDownloadingAll(true);
     const playable = songs.filter(s => s.audio_url);
-    for (const song of playable) {
-      await downloadFile(song.audio_url, song.title);
-      await new Promise(r => setTimeout(r, 800));
-    }
+for (const song of playable) {
+  await downloadFile(
+    song.audio_url,
+    song.title
+  );
+
+  await new Promise(r => setTimeout(r, 800));
+}
     setDownloadingAll(false);
   };
 

@@ -2070,3 +2070,12 @@ body {
     gap: 0 !important;
   }
 }
+.watermark {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  text-shadow: 0 0 4px black;
+}

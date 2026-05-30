@@ -390,7 +390,11 @@ const upNext =
 
     const a = document.createElement("a");
     a.href = blobUrl;
-    a.download = `${currentTrack.title}.mp3`;
+    const safeName = currentTrack.title
+  .replace(/[^\w\s-]/g, "")
+  .replace(/\s+/g, "_");
+
+a.download = `${safeName}_By_Lokesh_Ragutla.mp3`;
 
     document.body.appendChild(a);
     a.click();
