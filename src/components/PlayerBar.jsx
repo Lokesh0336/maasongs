@@ -374,7 +374,7 @@ const upNext =
 <FaDownload
   className="bouncy"
   size={22}
-  onClick={(e) => {
+  onClick={async (e) => {
     e.stopPropagation();
 
     const songUrl =
@@ -383,21 +383,20 @@ const upNext =
 
     if (!songUrl) return;
 
-    const link =
-      document.createElement("a");
+    const response = await fetch(songUrl);
+    const blob = await response.blob();
 
-    link.href = songUrl;
+    const blobUrl = URL.createObjectURL(blob);
 
-    link.setAttribute(
-      "rel",
-      "noopener noreferrer"
-    );
+    const a = document.createElement("a");
+    a.href = blobUrl;
+    a.download = `${currentTrack.title}.mp3`;
 
-    document.body.appendChild(link);
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
 
-    link.click();
-
-    document.body.removeChild(link);
+    URL.revokeObjectURL(blobUrl);
   }}
 />
               <FaEllipsisV
