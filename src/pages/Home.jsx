@@ -702,7 +702,7 @@ padding: "14px",
     </span>
   </a>
   <a
-    href="mailto:lokeshragutla@gmail.com"
+    href="mailto:support@maasongs.online"
     style={{
       display: "flex",
       alignItems: "center",
