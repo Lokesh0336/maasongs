@@ -15,29 +15,31 @@ export default function AlbumPage() {
 
   const FALLBACK_COVER = "https://via.placeholder.com/400?text=No+Cover";
 
-const downloadFile = async (url, fileName = "song") => {
+const downloadFile = async (url, fileName = "Download") => {
   try {
     if (!url) return;
 
-    const response = await fetch(url);
+    let extension = "mp3";
 
-    if (!response.ok) {
-      throw new Error("Download failed");
-    }
+    try {
+      const pathname = new URL(url).pathname;
+      const lastPart = pathname.split("/").pop();
 
-    const blob = await response.blob();
+      if (lastPart?.includes(".")) {
+        extension = lastPart.split(".").pop();
+      }
+    } catch (e) {}
 
-    const blobUrl = window.URL.createObjectURL(blob);
+    const safeName = fileName
+      .replace(/[^\w\s-]/g, "")
+      .replace(/\s+/g, "_");
 
-    const a = document.createElement("a");
-    a.href = blobUrl;
-    a.download = `${fileName}_By_Lokesh_Ragutla.mp3`;
+    const finalFileName =
+      `${safeName}_By_Lokesh_Ragutla.${extension}`;
 
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
+    window.location.href =
+      `https://audio.maasongs.online?url=${encodeURIComponent(url)}&filename=${encodeURIComponent(finalFileName)}`;
 
-    window.URL.revokeObjectURL(blobUrl);
   } catch (err) {
     console.error("Download error:", err);
   }

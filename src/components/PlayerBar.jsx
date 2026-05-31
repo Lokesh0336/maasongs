@@ -403,10 +403,14 @@ const upNext =
       `${safeTitle}_By_Lokesh_Ragutla.${extension}`;
 
     const workerUrl =
-      `https://jolly-band-b823.lokeshragutla.workers.dev/?url=${encodeURIComponent(fileUrl)}&filename=${encodeURIComponent(fileName)}`;
+      `https://audio.maasongs.online/?url=${encodeURIComponent(fileUrl)}&filename=${encodeURIComponent(fileName)}`;
 
     window.location.href = workerUrl;
   }}
+/>
+              <FaEllipsisV
+  className="bouncy"
+  onClick={() => setActiveModal("options")}
 />
             </div>
           </div>
