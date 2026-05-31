@@ -351,7 +351,33 @@ padding: "14px",
       lokeshragutla@gmail.com
     </span>
   </a>
+  <a
+    href="mailto:support@maasongs.online"
+    style={{
+      display: "flex",
+      alignItems: "center",
+      gap: "12px",
+      color: "#22d3ee",
+      fontWeight: 700,
+      textDecoration: "none",
+      background: "rgba(255,255,255,0.04)",
+      padding: "8px 10px",
+      borderRadius: "12px",
+      transition: "0.2s ease",
+    }}
+  >
+    <MdEmail
+      size={22}
+      style={{
+        color: "#22d3ee",
+        flexShrink: 0,
+      }}
+    />
 
+    <span>
+      support@maasongs.online
+    </span>
+  </a>
   {/* INSTAGRAM */}
   <a
     href="https://instagram.com/lokesh_ragutla96"
@@ -675,7 +701,33 @@ padding: "14px",
       lokeshragutla@gmail.com
     </span>
   </a>
+  <a
+    href="mailto:lokeshragutla@gmail.com"
+    style={{
+      display: "flex",
+      alignItems: "center",
+      gap: "12px",
+      color: "#22d3ee",
+      fontWeight: 700,
+      textDecoration: "none",
+      background: "rgba(255,255,255,0.04)",
+      padding: "12px 14px",
+      borderRadius: "12px",
+      transition: "0.2s ease",
+    }}
+  >
+    <MdEmail
+      size={22}
+      style={{
+        color: "#22d3ee",
+        flexShrink: 0,
+      }}
+    />
 
+    <span>
+      support@maasongs.online
+    </span>
+  </a>
   {/* WEBSITE */}
   <a
     href="https://audiostation.netlify.app/"
