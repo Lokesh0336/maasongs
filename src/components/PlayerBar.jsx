@@ -374,38 +374,39 @@ const upNext =
 <FaDownload
   className="bouncy"
   size={22}
-  onClick={async (e) => {
+  onClick={(e) => {
     e.stopPropagation();
 
-    const songUrl =
+    const fileUrl =
       currentTrack?.audio_url ||
       currentTrack?.url;
 
-    if (!songUrl) return;
+    if (!fileUrl) return;
 
-    const response = await fetch(songUrl);
-    const blob = await response.blob();
+    // detect extension
+    let extension = "mp3";
 
-    const blobUrl = URL.createObjectURL(blob);
+    try {
+      const pathname = new URL(fileUrl).pathname;
+      const lastPart = pathname.split("/").pop();
 
-    const a = document.createElement("a");
-    a.href = blobUrl;
-    const safeName = currentTrack.title
-  .replace(/[^\w\s-]/g, "")
-  .replace(/\s+/g, "_");
+      if (lastPart?.includes(".")) {
+        extension = lastPart.split(".").pop();
+      }
+    } catch (err) {}
 
-a.download = `${safeName}_By_Lokesh_Ragutla.mp3`;
+    const safeTitle = (currentTrack.title || "Download")
+      .replace(/[^\w\s-]/g, "")
+      .replace(/\s+/g, "_");
 
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
+    const fileName =
+      `${safeTitle}_By_Lokesh_Ragutla.${extension}`;
 
-    URL.revokeObjectURL(blobUrl);
+    const workerUrl =
+      `https://jolly-band-b823.lokeshragutla.workers.dev/?url=${encodeURIComponent(fileUrl)}&filename=${encodeURIComponent(fileName)}`;
+
+    window.location.href = workerUrl;
   }}
-/>
-              <FaEllipsisV
-  className="bouncy"
-  onClick={() => setActiveModal("options")}
 />
             </div>
           </div>
